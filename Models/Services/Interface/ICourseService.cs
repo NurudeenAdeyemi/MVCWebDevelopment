@@ -6,6 +6,8 @@ namespace WebDevelopment.Models.Services.Interface
     {
         //add new course
         CourseDTO AddCourse(CreateCourseRequest request);
+        //update a course
+        CourseDTO UpdateCourse(UpdateCourseRequest request);
         //view all courses
         IReadOnlyList<CourseDTO> GetCourses();
         //view a specific course details

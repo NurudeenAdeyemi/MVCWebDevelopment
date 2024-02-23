@@ -1,8 +1,6 @@
-﻿using FluentValidation;
-
-namespace WebDevelopment.Models.Dtos
+﻿namespace WebDevelopment.Models.Dtos
 {
-    public class CreateCourseRequest
+    public class UpdateCourseRequest
     {
         public string Name { get; set; } = default!;
         public string? Description { get; set; }

@@ -1,5 +1,6 @@
 ﻿using WebDevelopment.Models.Dtos;
 using WebDevelopment.Models.Entities;
+using WebDevelopment.Models.Exceptions;
 using WebDevelopment.Models.Repositories.Interfaces;
 using WebDevelopment.Models.Services.Interface;
 
@@ -21,11 +22,12 @@ namespace WebDevelopment.Models.Services.Implementation
             bool courseExist = _courseRepository.Exist(x => x.Name == request.Name || x.Code == request.Code);
             if (courseExist)
             {
-                return new CourseDTO
+                /*return new CourseDTO
                 {
                     Message = $"Course with name {request.Name} or Code {request.Code} already exist",
                     Status = false
-                };
+                };*/
+                throw new BadRequestException($"Course with name {request.Name} or Code {request.Code} already exist");
             }
 
             var course = new Course
@@ -57,7 +59,6 @@ namespace WebDevelopment.Models.Services.Implementation
                 Unit = request.Unit,
                 Message = "",
                 Status = true,
-                Lessons = request.Lessons
             };
         }
 
@@ -68,10 +69,39 @@ namespace WebDevelopment.Models.Services.Implementation
 
         public CourseDTO GetCourse(int id)
         {
-            throw new NotImplementedException();
+            var course = _courseRepository.GetCourse(id);
+            if(course is null)
+            {
+                throw new NotFoundException($"Course with id:{id} does not exist");
+            }
+            return new CourseDTO
+            {
+                CourseId=course.Id,
+                Code = course.Code,
+                Name = course.Name,
+                Description = course.Description,
+                Unit = course.Unit,
+                Lessons = course.Lessons.Select(x => new Less3(x.Id, x.Topic)).ToList(),
+                Status = true
+            };
         }
 
         public IReadOnlyList<CourseDTO> GetCourses()
+        {
+            var courses = _courseRepository.GetCourses();
+            return courses.Select(course => new CourseDTO
+            {
+                CourseId = course.Id,
+                Code = course.Code,
+                Name = course.Name,
+                Description = course.Description,
+                Unit = course.Unit,
+                Lessons = course.Lessons.Select(x => new Less3(x.Id, x.Topic)).ToList(),
+                Status = true
+            }).ToList();
+        }
+
+        public CourseDTO UpdateCourse(UpdateCourseRequest request)
         {
             throw new NotImplementedException();
         }

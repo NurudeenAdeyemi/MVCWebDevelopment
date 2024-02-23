@@ -1,4 +1,6 @@
-﻿namespace WebDevelopment.Models.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebDevelopment.Models.Entities
 {
     public class Course
     {

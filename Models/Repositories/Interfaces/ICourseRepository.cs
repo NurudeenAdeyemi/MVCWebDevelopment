@@ -7,5 +7,6 @@ namespace WebDevelopment.Models.Repositories.Interfaces
         IReadOnlyList<Course> GetCourses();
         Course GetCourse(int id);
         Course AddCourse(Course course);
+        bool Exist(Func<Course, bool> predicate);
     }
 }

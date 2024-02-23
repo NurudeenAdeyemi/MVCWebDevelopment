@@ -18,9 +18,14 @@ namespace WebDevelopment.Models.Repositories.Implementations
             return course;
         }
 
-        public Course GetCourse(int id)
+        public bool Exist(Func<Course, bool> predicate)
         {
-            return _context.Courses.FirstOrDefault(c => c.Id == id);
+            return _context.Courses.Any(predicate);
+        }
+
+        public Course? GetCourse(int id)
+        {
+            return _context.Courses.SingleOrDefault(c => c.Id == id);
         }
 
         public IReadOnlyList<Course> GetCourses()
