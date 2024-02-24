@@ -9,7 +9,7 @@
         public string Email { get; set; } = default!;
         public string Phone { get; set; } = default!;
         public string Address { get; set; } = default!;
-        public DateOnly DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public ICollection<StudentCourse> StudentCourses { get; set; } = new HashSet<StudentCourse>();
     }
 }

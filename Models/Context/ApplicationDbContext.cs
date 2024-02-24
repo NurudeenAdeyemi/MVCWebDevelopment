@@ -23,9 +23,9 @@ namespace WebDevelopment.Models.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Data seeding with EF context
-            builder.Entity<Role>().HasData(
+           /* builder.Entity<Role>().HasData(
                 new Role { Name = "Admin" }, new Role { Name = "Student" }
-                );
+                );*/
 
             // Fluent API validation with EF configuration
             /*  builder.Entity<Role>().Property(r => r.Name)

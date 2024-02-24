@@ -57,14 +57,25 @@ namespace WebDevelopment.Models.Services.Implementation
                 Code= request.Code,
                 Description= request.Description,
                 Unit = request.Unit,
-                Message = "",
+                Message = "Course succesfully added",
                 Status = true,
             };
         }
 
         public BaseResponse DeleteCourse(int id)
         {
-            throw new NotImplementedException();
+            var course = _courseRepository.GetCourse(id);
+            if (course is null)
+            {
+                throw new NotFoundException($"Course with id:{id} does not exist");
+            }
+            _courseRepository.Delete(course);
+            _unitOfWork.Save();
+            return new BaseResponse
+            {
+                Message = "Deleted",
+                Status = true,
+            };
         }
 
         public CourseDTO GetCourse(int id)

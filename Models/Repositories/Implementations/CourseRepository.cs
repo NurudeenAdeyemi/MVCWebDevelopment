@@ -1,4 +1,5 @@
-﻿using WebDevelopment.Models.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using WebDevelopment.Models.Context;
 using WebDevelopment.Models.Entities;
 using WebDevelopment.Models.Repositories.Interfaces;
 
@@ -18,6 +19,11 @@ namespace WebDevelopment.Models.Repositories.Implementations
             return course;
         }
 
+        public void Delete(Course course)
+        {
+            _context.Courses.Remove(course);
+        }
+
         public bool Exist(Func<Course, bool> predicate)
         {
             return _context.Courses.Any(predicate);
@@ -30,7 +36,7 @@ namespace WebDevelopment.Models.Repositories.Implementations
 
         public IReadOnlyList<Course> GetCourses()
         {
-            return _context.Courses.ToList();  
+            return _context.Courses.Include(x => x.Lessons).ToList();  
         }
     }
 }

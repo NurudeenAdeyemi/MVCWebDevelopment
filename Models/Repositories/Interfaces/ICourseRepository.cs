@@ -6,6 +6,7 @@ namespace WebDevelopment.Models.Repositories.Interfaces
     {
         IReadOnlyList<Course> GetCourses();
         Course GetCourse(int id);
+        void Delete(Course course);
         Course AddCourse(Course course);
         bool Exist(Func<Course, bool> predicate);
     }

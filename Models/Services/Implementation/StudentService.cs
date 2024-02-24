@@ -18,7 +18,8 @@ namespace WebDevelopment.Models.Services.Implementation
 
         public StudentCreateResponse AddStudent(StudentCreateRequestModel model)
         {
-            var usernameExist = _studentRepository.GetStudent();
+            // var usernameExist = _studentRepository.GetStudent();
+            return null;
         }
     }
 }
